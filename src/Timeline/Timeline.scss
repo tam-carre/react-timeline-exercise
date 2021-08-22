@@ -1,0 +1,155 @@
+@import-normalize;
+@import url('http://fonts.cdnfonts.com/css/avenir-lt-std');
+
+$font-main: 'Avenir LT Std', Helvetica, sans-serif;
+$bg: #fff;
+$bg-dark1: #F7F7F7;
+$accent: #C46AE1;
+$accent-light1: #C8A2DE;
+$text: #000;
+$text-light1: #777;
+$ipad-width: 768px;
+
+@mixin muted-shadow {
+  box-shadow: 0px 5px 9px 0px rgba(0,0,0,0.16);
+}
+
+@mixin vertical-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slide-in-fwd-center {
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+}
+
+ul.tam-timeline {
+  --timeline-padding: 12px;
+  --timeline-width: calc(100% - var(--timeline-padding) - 70px);
+  --event-width: calc(100% - 60px);
+
+  @include muted-shadow;
+  @include vertical-flex;
+  background-color: $bg-dark1;
+  border-radius: 5px;
+  color: $text;
+  font-family: $font-main;
+  font-size: Min(18px, 3.8vw);
+  list-style: none;
+  margin: 20px;
+  max-width: var(--timeline-width);
+  padding: var(--timeline-padding);
+  width: 100%;
+
+  @media (min-width: $ipad-width) {
+    --timeline-padding: 30px;
+  }
+
+  li {
+    $timeline-li: &;
+    align-self: flex-end;
+    position: relative;
+    width: var(--event-width);
+
+    @media (min-width: $ipad-width) {
+      --event-width: calc(
+          (var(--timeline-width) / 2)
+        - (var(--timeline-padding) * 2)
+        + 67px
+      );
+    }
+
+    @media (min-width: $ipad-width) {
+      &.left {
+        align-self: flex-start;
+      }
+    }
+
+    article {
+      @include muted-shadow;
+      background-color: white;
+      border-left: 4px solid $accent-light1;
+      border-radius: 4px;
+      padding: 16px;
+      text-align: left;
+      margin: 20px 0;
+      position: relative;
+      left: -15px;
+
+      @media (min-width: $ipad-width) {
+        align-self: flex-start;
+        left: unset;
+      }
+
+      &.pop-in {
+        animation: slide-in-fwd-center .6s cubic-bezier(0.33, 1, 0.68, 1) both;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+
+        .timeline-time {
+          color: $text-light1;
+        }
+
+        .timeline-title {
+          font-weight: bold;
+        }
+      }
+    }
+    @media (min-width: $ipad-width) {
+      &.left article {
+        text-align: right;
+        border-left: unset;
+        border-right: 4px solid $accent-light1;
+
+        header .timeline-title {
+          order: 2;
+        }
+      }
+    }
+
+    // Timeline dots
+    &::before {
+      content: '';
+      position: absolute;
+      background-color: $bg;
+      border-radius: 50%;
+      border: 4px solid $accent;
+      padding: 3px;
+      left: -50px;
+      top: 45px;
+      z-index: 2;
+    }
+    @media (min-width: $ipad-width) {
+      top: 15px;
+
+      &.left::before {
+        left: unset;
+        right: -50px;
+      }
+    }
+
+    // Timeline line
+    &::after {
+      border-radius: 5px;
+      border-right: 4px solid $accent-light1;
+      content: '';
+      height: calc(100% + 5px);
+      left: -45px;
+      position: absolute;
+      top: 0%;
+    }
+    @media (min-width: $ipad-width) {
+      &.left::after {
+        left: unset;
+        right: -45px;
+      }
+    }
+  }
+}
