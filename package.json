@@ -1,5 +1,6 @@
 {
-  "name": "react-timeline-project",
+  "name": "react-timeline-exercise",
+  "homepage": "https://tam-carre.github.io/react-timeline-exercise",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,6 +17,7 @@
     "fp-ts": "^2.11.1",
     "fp-ts-ramda": "^0.1.7",
     "fp-ts-std": "^0.11.0",
+    "gh-pages": "^3.2.3",
     "io-ts": "^2.2.16",
     "node-sass": "^6.0.1",
     "ramda": "^0.27.1",
@@ -27,6 +29,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

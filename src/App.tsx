@@ -11,7 +11,7 @@ export const App = () => {
 
   useEffect (() => {
     const updateEvts = async () => addEvent (await getPlaceholderEvent ())
-    const interval   = setInterval (updateEvts, 4000)
+    const interval   = setInterval (updateEvts, 20000)
     return () => clearInterval (interval)
   })
 
