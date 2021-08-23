@@ -106,9 +106,11 @@ ul.tam-timeline {
         .timeline-title {
           font-weight: bold;
 
-          @at-root {
-            #{$timeline-li}.left article header .timeline-title {
-              order: 2;
+          @media (min-width: $ipad-width) {
+            @at-root {
+              #{$timeline-li}.left article header .timeline-title {
+                  order: 2;
+              }
             }
           }
         }
