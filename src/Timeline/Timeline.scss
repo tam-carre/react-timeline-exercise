@@ -28,7 +28,6 @@ $ipad-width: 768px;
 ul.tam-timeline {
   --timeline-padding: 12px;
   --timeline-width: calc(100% - var(--timeline-padding) - 70px);
-  --event-width: calc(100% - 60px);
 
   @include muted-shadow;
   @include vertical-flex;
@@ -51,10 +50,10 @@ ul.tam-timeline {
     $timeline-li: &;
     align-self: flex-end;
     position: relative;
-    width: var(--event-width);
+    width: calc(100% - 60px);
 
     @media (min-width: $ipad-width) {
-      --event-width: calc(
+      width: calc(
           (var(--timeline-width) / 2)
         - (var(--timeline-padding) * 2)
         + 67px
@@ -81,6 +80,14 @@ ul.tam-timeline {
       @media (min-width: $ipad-width) {
         align-self: flex-start;
         left: unset;
+
+        @at-root {
+          #{$timeline-li}.left article {
+            text-align: right;
+            border-left: unset;
+            border-right: 4px solid $accent-light1;
+          }
+        }
       }
 
       &.pop-in {
@@ -98,17 +105,12 @@ ul.tam-timeline {
 
         .timeline-title {
           font-weight: bold;
-        }
-      }
-    }
-    @media (min-width: $ipad-width) {
-      &.left article {
-        text-align: right;
-        border-left: unset;
-        border-right: 4px solid $accent-light1;
 
-        header .timeline-title {
-          order: 2;
+          @at-root {
+            #{$timeline-li}.left article header .timeline-title {
+              order: 2;
+            }
+          }
         }
       }
     }
@@ -124,15 +126,18 @@ ul.tam-timeline {
       left: -50px;
       top: 45px;
       z-index: 2;
-    }
+
     @media (min-width: $ipad-width) {
       top: 15px;
 
-      &.left::before {
-        left: unset;
-        right: -50px;
+      @at-root {
+        #{$timeline-li}.left::before {
+          left: unset;
+          right: -50px;
+        }
       }
     }
+  }
 
     // Timeline line
     &::after {
@@ -143,11 +148,14 @@ ul.tam-timeline {
       left: -45px;
       position: absolute;
       top: 0%;
-    }
-    @media (min-width: $ipad-width) {
-      &.left::after {
-        left: unset;
-        right: -45px;
+
+      @media (min-width: $ipad-width) {
+        @at-root {
+          #{$timeline-li}.left::after {
+            left: unset;
+            right: -45px;
+          }
+        }
       }
     }
   }
